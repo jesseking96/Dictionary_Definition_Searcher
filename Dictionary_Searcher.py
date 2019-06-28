@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 26 12:39:14 2019
-
-@author: skyking
+This program will search a dictionary for a user-provided word, and return the 
+definition, if it exists. If the word is not found in the dictionary, the 
+program will make a suggestion for a similar word. If that new suggestion is in
+the dictionary, and if the user confirms that the suggestion is the correct
+word, the program will return the definition of the suggested word.
 """
 
 import json
@@ -17,7 +19,10 @@ for key in dict_data.keys():
     key = key.lower()
 
 def get_word():
-    
+    """
+    Prompts the user to input a word, checks that the word contains only
+    letters, and returns the word.
+    """
     while True:
         word = input("Please enter a word: ")
         if word.isalpha() == False:
@@ -27,7 +32,11 @@ def get_word():
     
     
 def get_definition(word):
-    
+    """
+    Takes in a word, and prints the definition, if it exists. If it doesn't
+    exists, makes a suggestion for a similar word. If user confirms that 
+    similar word is correct, returns definition of the corrected word.
+    """
     global dict_data
     
     while True:   
@@ -57,7 +66,9 @@ def get_definition(word):
         
         
 def is_repeat():
-    
+    """
+    Asks the user if they would like to check another word. Returns a boolean.
+    """
     while True:
         repeat = input("Would you like to check another word (Y/N)? ")
         print(repeat)
