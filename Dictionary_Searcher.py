@@ -12,9 +12,12 @@ from spellchecker import SpellChecker
 
 with open("Dictionary.json", "r") as dict_file:
     dict_data = json.load(dict_file)
-    
+
+for key in dict_data.keys():
+    key = key.lower()
 
 def get_word():
+    
     while True:
         word = input("Please enter a word: ")
         if word.isalpha() == False:
@@ -22,31 +25,39 @@ def get_word():
             continue
         return word
     
+    
 def get_definition(word):
     
     global dict_data
     
-    if word in dict_data.keys():
-        print("\n")
-        print(dict_data[word])
-    else:
-        spell = SpellChecker()
-        print(f"Word does not exist. \n")
-        word_guess = spell.correction(word)
-        while True:
-            is_fixed = input(f"Did you mean {word_guess} (Y/N)? ")
-            if is_fixed. upper() in ["Y","N"]:
-                if is_fixed.upper() == "Y":
-                    print(dict_data[word_guess])
-                    break
-                else:
-                    print("\nUnknown word. ")
-                    break
-            else:
-                print("\nInvalid input. Try again. ")
-        
+    while True:   
+        if word.lower() in dict_data:
+            print("\n")
+            print(dict_data[word.lower()])
+            break
 
+        spell = SpellChecker()
+        print("Word does not exist. \n")
+        word = spell.correction(word)
+        if word.lower() in dict_data:
+            while True:
+                is_fixed = input(f"Did you mean {word} (Y/N)? ")
+                if is_fixed. upper() in ["Y","N"]:
+                    if is_fixed.upper() == "Y":
+                        print("\n")
+                        print(dict_data[word.lower()])
+                        break
+                    elif is_fixed.upper() == "N":
+                        break
+                    else:
+                        print("\nInvalid input. Try again. ")
+                        continue
+        else:
+            break
+        
+        
 def is_repeat():
+    
     while True:
         repeat = input("Would you like to check another word (Y/N)? ")
         print(repeat)
@@ -54,6 +65,7 @@ def is_repeat():
             return repeat.upper() == "Y"
         else:
             print("Invalid input. Please try again. ")
+
 
 repeat = True
 
