@@ -58,11 +58,10 @@ def get_definition(word):
                         break
                     elif is_fixed.upper() == "N":
                         break
-                    else:
-                        print("\nInvalid input. Try again. ")
-                        continue
-        else:
-            break
+                else:
+                    print("\nInvalid input. Try again. ")
+                    continue
+        break
         
         
 def is_repeat():
